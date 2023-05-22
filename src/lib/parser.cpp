@@ -67,7 +67,12 @@ void bfsOnIncludes(const string& filename) {
     cout << "g++ -o main ";
 
     for (const string& include : visitedIncludes) {
-        cout << "\"" << include << "\" ";
+        // if include ends with .hpp change to .cpp
+        string includeCpp = include;
+        if (includeCpp.size() > 4 && includeCpp.substr(includeCpp.size() - 4) == ".hpp") {
+            includeCpp = includeCpp.substr(0, includeCpp.size() - 4) + ".cpp";
+        }
+        cout << "\"" << includeCpp << "\" ";
     }
     cout << endl;
 }
